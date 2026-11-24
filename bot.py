@@ -66,6 +66,12 @@ PROJECTS_ES = """Proyectos (demos públicas, no trabajos de clientes):
   https://github.com/andresnv22/reposteria-bot
 • n8n + WhatsApp — router de reservas, recordatorios 24 h y escalamiento a Telegram.
   https://github.com/andresnv22/n8n-whatsapp-workflows
+• Bot de captación Andrés AI — este mismo bot, código abierto.
+  https://github.com/andresnv22/ai-lead-bot
+• FAQ Web Bot — widget de preguntas frecuentes + captura de leads para cualquier web.
+  https://github.com/andresnv22/faq-web-bot
+• Correos/PDF a Excel — automatización contable: IMAP, PDFs, dedupe y Excel/CSV.
+  https://github.com/andresnv22/correos-excel-bot
 • Radar de ofertas — Playwright + Telegram; más de 600 ofertas/día, filtros y deduplicación."""
 PROJECTS_EN = """Projects (public demos, not client work):
 • Clinic Bot — AI agent that books/checks/cancels appointments; rules in code, no double-booking, 55 tests.
@@ -78,6 +84,12 @@ PROJECTS_EN = """Projects (public demos, not client work):
   https://github.com/andresnv22/reposteria-bot
 • n8n + WhatsApp — booking router, 24h reminders and Telegram escalation.
   https://github.com/andresnv22/n8n-whatsapp-workflows
+• Andrés AI sales bot — this same bot, open source.
+  https://github.com/andresnv22/ai-lead-bot
+• FAQ Web Bot — embeddable FAQ widget + lead capture for any website.
+  https://github.com/andresnv22/faq-web-bot
+• Email/PDF to Excel — accounting automation: IMAP, PDFs, dedupe and Excel/CSV.
+  https://github.com/andresnv22/correos-excel-bot
 • Deals radar — Playwright + Telegram; 600+ offers/day, filters and deduplication."""
 PRICES_ES = """Tarifas de referencia:
 • Piloto de automatización o chatbot: desde USD 80–150.
@@ -169,7 +181,7 @@ Objetivo: responder dudas, mostrar proyectos y calificar leads. No eres el bot d
 Datos:
 - Servicios: agentes de IA/chatbots (web, WhatsApp Cloud API, Telegram), backends Python/FastAPI, integraciones de APIs/webhooks, scraping/automatización (Python, Playwright), AWS/Terraform y tests.
 - Proyectos (demos, no clientes): Clinic Bot (55 tests, sin doble reserva), WhatsApp AI Agent (Cloud API oficial, webhooks firmados, tests), Web Scraper (9 tests), Radar de ofertas (600+/día).
-- Links: https://github.com/andresnv22/clinica-bot · https://github.com/andresnv22/whatsapp-ai-agent · https://github.com/andresnv22/web-scraper-demo · https://github.com/andresnv22/reposteria-bot · https://github.com/andresnv22/n8n-whatsapp-workflows · https://github.com/andresnv22
+- Links: https://github.com/andresnv22/clinica-bot · https://github.com/andresnv22/whatsapp-ai-agent · https://github.com/andresnv22/web-scraper-demo · https://github.com/andresnv22/reposteria-bot · https://github.com/andresnv22/n8n-whatsapp-workflows · https://github.com/andresnv22/ai-lead-bot · https://github.com/andresnv22/faq-web-bot · https://github.com/andresnv22/correos-excel-bot · https://github.com/andresnv22
 - Ejemplos de negocios: clínicas, reposterías, barberías, e-commerce, inmobiliarias y servicios locales.
 - Paquetes de lanzamiento: Esencial USD 150 + 19/mes; Pro USD 300 + 29/mes; WhatsApp USD 600 + 49/mes; a medida desde USD 800 + mensualidad. La mensualidad cubre hosting, monitoreo y cambios menores; la IA se paga aparte. Suben después de 3 reseñas.
 - Este bot es una demo de lo que Andrés construye; si el usuario pregunta, ofrece un paquete y pide negocio y contacto.

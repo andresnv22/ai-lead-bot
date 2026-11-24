@@ -100,6 +100,8 @@ The tests cover source parsing, lead scoring, contact extraction, packages and S
 - [WhatsApp AI Agent](https://github.com/andresnv22/whatsapp-ai-agent) — official Meta API, 29 tests.
 - [Bakery Bot](https://github.com/andresnv22/reposteria-bot) — cake orders, 80 tests.
 - [n8n + WhatsApp workflows](https://github.com/andresnv22/n8n-whatsapp-workflows) — booking router, reminders, escalation.
-- [Web Scraper](https://github.com/andresnv22/web-scraper-demo) — polite Python scraper, 9 tests.
+- [FAQ Web Bot](https://github.com/andresnv22/faq-web-bot) — embeddable FAQ widget + lead capture, 4 tests.
+- [Email/PDF to Excel](https://github.com/andresnv22/correos-excel-bot) — accounting automation with IMAP and PDFs, 3 tests.
+- [Web Scraper](https://github.com/andresnv22/web-scraper-demo) — polite Python scraper, 10 tests.
 
 Built by [Andrés Nuñez](https://github.com/andresnv22). Available for remote freelance work.
