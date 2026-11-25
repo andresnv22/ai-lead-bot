@@ -18,8 +18,6 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 import requests
-from google import genai
-from google.genai import types
 
 BASE = Path(__file__).resolve().parent
 DB = BASE / "leads.db"
@@ -42,16 +40,13 @@ def load_env() -> None:
 load_env()
 TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
 ADMIN = os.environ.get("TELEGRAM_ADMIN_CHAT_ID", "").strip()
-GEMINI_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
-MODEL = os.environ.get("MODELO_GEMINI", "gemini-3.5-flash").strip() or "gemini-3.5-flash"
-if MODEL in {"gemini-3.8-flash", "gemini-3.8-pro"}:
-    MODEL = "gemini-3.5-flash"
+DEEPSEEK_KEY = os.environ.get("DEEPSEEK_API_KEY", "").strip()
+MODEL = os.environ.get("DEEPSEEK_MODEL", "deepseek-flash").strip() or "deepseek-flash"
+DEEPSEEK_BASE = os.environ.get("DEEPSEEK_BASE_URL", "https://api.deepseek.com").rstrip("/")
 if not TOKEN:
     raise SystemExit("Falta TELEGRAM_BOT_TOKEN")
-if not GEMINI_KEY:
-    raise SystemExit("Falta GEMINI_API_KEY")
-
-client = genai.Client(api_key=GEMINI_KEY)
+if not DEEPSEEK_KEY:
+    raise SystemExit("Falta DEEPSEEK_API_KEY")
 
 # ---------- textos ----------
 LINK_GITHUB = "https://github.com/andresnv22"
@@ -760,22 +755,31 @@ def save_from_state(chat_id: int, user: dict, value: str) -> None:
 
 
 # ---------- IA ----------
-def gemini_reply(chat_id: int, user: dict, value: str) -> str:
+def llm_reply(chat_id: int, user: dict, value: str) -> str:
     lang = user.get("lang") or "es"
     past = history(chat_id, 8)
-    conversation = "\n".join(f"{role}: {content}" for role, content in past)
-    prompt = (
-        f"{SYSTEM}\n\nIdioma del usuario: {'español' if lang == 'es' else 'inglés'}.\n"
-        f"Conversación:\n{conversation}\nUsuario: {value}\nAsistente:"
+    messages = [{"role": "system", "content": SYSTEM}]
+    for role, content in past:
+        messages.append({"role": "user" if role == "Usuario" else "assistant", "content": content})
+    messages.append({"role": "user", "content": value})
+    response = requests.post(
+        f"{DEEPSEEK_BASE}/chat/completions",
+        headers={"Authorization": f"Bearer {DEEPSEEK_KEY}", "Content-Type": "application/json"},
+        json={
+            "model": MODEL,
+            "messages": messages,
+            "temperature": 0.4,
+            "max_tokens": 350,
+            "stream": False,
+            "thinking": {"type": "disabled"},
+        },
+        timeout=45,
     )
-    response = client.models.generate_content(
-        model=MODEL,
-        contents=prompt,
-        config=types.GenerateContentConfig(temperature=0.4, max_output_tokens=350),
-    )
-    answer = (getattr(response, "text", "") or "").strip()
+    response.raise_for_status()
+    data = response.json()
+    answer = ((data.get("choices") or [{}])[0].get("message", {}).get("content") or "").strip()
     if not answer:
-        raise RuntimeError("Gemini devolvió una respuesta vacía")
+        raise RuntimeError("DeepSeek devolvió una respuesta vacía")
     answer = answer.replace("**", "").replace("__", "")
     return answer[:3500]
 
@@ -945,7 +949,7 @@ def handle_message(message: dict) -> None:
     add_message(chat_id, "Usuario", value)
     typing(chat_id)
     try:
-        answer = gemini_reply(chat_id, user, value)
+        answer = llm_reply(chat_id, user, value)
     except Exception:
         LOG.exception("Gemini falló")
         send(chat_id, text(lang, "fallback", email=EMAIL))
@@ -1061,7 +1065,7 @@ def handle_callback(callback: dict) -> None:
 def main() -> None:
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
     init_db()
-    LOG.info("Andrés AI v2 iniciado con modelo %s", MODEL)
+    LOG.info("Andrés AI v2 iniciado con DeepSeek %s", MODEL)
     offset = 0
     while True:
         try:

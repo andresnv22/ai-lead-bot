@@ -11,7 +11,7 @@ I built this bot as a sales tool and as a portfolio piece. It works for any busi
 ## What it does
 
 - **Bilingual (ES/EN)** with a language picker.
-- **Answers with Gemini** using a system prompt with services, projects, pricing and guardrails.
+- **Answers with DeepSeek** using a system prompt with services, projects, pricing and guardrails.
 - **Sells fixed packages** with inline buttons: “Quiero este” → business name → contact → lead saved.
 - **Qualifies leads**: package, service, budget (for custom work), timeline and contact.
 - **Scores leads 0–10** (HOT/WARM/COLD) and sends them to the admin with status buttons: Contactado / Cerrar / Descartar.
@@ -22,7 +22,7 @@ I built this bot as a sales tool and as a portfolio piece. It works for any busi
 
 ## Stack
 
-Python 3.12+, `python-telegram-bot`-free (raw Bot API + `requests`), Google Gemini (`google-genai`), SQLite.
+Python 3.12+, `python-telegram-bot`-free (raw Bot API + `requests`), DeepSeek API (OpenAI-compatible), SQLite.
 
 ```
 Telegram ── long polling ──> bot.py ──> Gemini
@@ -47,11 +47,12 @@ python bot.py
 ```env
 TELEGRAM_BOT_TOKEN=123456:ABC...
 TELEGRAM_ADMIN_CHAT_ID=123456789
-GEMINI_API_KEY=...
-MODELO_GEMINI=gemini-3.5-flash
+DEEPSEEK_API_KEY=...
+DEEPSEEK_MODEL=deepseek-flash
+DEEPSEEK_BASE_URL=https://api.deepseek.com
 ```
 
-Use `gemini-3.5-flash`; `gemini-3.8-flash` can hang on some accounts.
+Use `deepseek-flash` with thinking disabled; `deepseek-chat` also works. The API is OpenAI-compatible.
 
 Create the bot with [@BotFather](https://t.me/BotFather) and send `/start` to it once, so the bot can message the admin.
 
@@ -85,7 +86,7 @@ pip install -r requirements-dev.txt
 pytest
 ```
 
-The tests cover source parsing, lead scoring, contact extraction, packages and SQLite persistence. They don't call Telegram or Gemini.
+The tests cover source parsing, lead scoring, contact extraction, packages and SQLite persistence. They don't call Telegram or DeepSeek.
 
 ## Limits
 

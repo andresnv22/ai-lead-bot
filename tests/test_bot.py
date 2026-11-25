@@ -3,9 +3,9 @@ import os
 from pathlib import Path
 
 os.environ.setdefault("TELEGRAM_BOT_TOKEN", "123456:TEST")
-os.environ.setdefault("GEMINI_API_KEY", "test-key")
+os.environ.setdefault("DEEPSEEK_API_KEY", "test-key")
 os.environ.setdefault("TELEGRAM_ADMIN_CHAT_ID", "")
-os.environ.setdefault("MODELO_GEMINI", "gemini-3.5-flash")
+os.environ.setdefault("DEEPSEEK_MODEL", "deepseek-flash")
 
 import bot  # noqa: E402
 
