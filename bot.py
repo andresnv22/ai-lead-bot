@@ -4,7 +4,7 @@
 - ES/EN, fuente por deep link (?start=upwork), calificación guiada.
 - Leads persistidos en SQLite, notificación al admin con botones de estado.
 - Métricas por fuente/servicio y comandos de CRM para el admin.
-- Gemini 3.5 (texto plano) con fallback y límites de uso.
+- DeepSeek (texto plano) con fallback y límites de uso.
 """
 from __future__ import annotations
 
