@@ -25,7 +25,7 @@ I built this bot as a sales tool and as a portfolio piece. It works for any busi
 Python 3.12+, `python-telegram-bot`-free (raw Bot API + `requests`), DeepSeek API (OpenAI-compatible), SQLite.
 
 ```
-Telegram ── long polling ──> bot.py ──> Gemini
+Telegram ── long polling ──> bot.py ──> DeepSeek
                                 │
                                 ├── SQLite (users, messages, leads)
                                 └── Telegram admin notifications
@@ -38,7 +38,7 @@ python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 cp .env.example .env
-# edit .env: bot token, admin chat id, Gemini key
+# edit .env: bot token, admin chat id, DeepSeek key
 python bot.py
 ```
 
