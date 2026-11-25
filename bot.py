@@ -951,7 +951,7 @@ def handle_message(message: dict) -> None:
     try:
         answer = llm_reply(chat_id, user, value)
     except Exception:
-        LOG.exception("Gemini falló")
+        LOG.exception("DeepSeek falló")
         send(chat_id, text(lang, "fallback", email=EMAIL))
         return
     add_message(chat_id, "Asistente", answer)
